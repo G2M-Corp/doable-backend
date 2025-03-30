@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django_filters",
     "drf_spectacular",
     "rest_framework",
+    "uploader",
     "core",
 ]
 
@@ -110,6 +111,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 STATIC_URL = "static/"
+
+MEDIA_ENDPOINT = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+FILE_UPLOAD_PERMISSIONS = 0o640
 
 # App Uploader settings
 MEDIA_ENDPOINT = "/media/"

@@ -2,6 +2,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from .user import User
 from .categoria import Categoria
+from uploader.models import Image
 
 class Tarefa(models.Model):
     class TaskStatus(models.TextChoices):
@@ -24,3 +25,12 @@ class Tarefa(models.Model):
 
     def __str__(self):
         return f"{self.titulo} | ({', '.join([categoria.nome for categoria in self.categoria.all()])})"
+
+    imagem = models.ForeignKey(
+        Image,
+        related_name="+",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        default=None,
+    )

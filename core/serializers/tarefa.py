@@ -6,16 +6,30 @@ from rest_framework.serializers import (
     ModelSerializer,
     SerializerMethodField,
     ValidationError,
+    SlugRelatedField,
 )
 from datetime import date
 from core.models import Tarefa, Categoria
 from core.serializers import CategoriaSerializer
 
+from uploader.models import Image
+from uploader.serializers import ImageSerializer
 
 class TarefaSerializer(ModelSerializer):
     usuario = CharField(source="usuario.username", read_only=True)
     categorias = CategoriaSerializer(many=True, read_only=True)
     criado_em = DateTimeField(read_only=True)
+    imagem_attachment_key = SlugRelatedField(
+        source="imagem",
+        queryset=Image.objects.all(),
+        slug_field="attachment_key",
+        required=False,
+        write_only=True,
+    )
+    imagem = ImageSerializer(
+        required=False,
+        read_only=True
+    )
 
     class Meta:
         model = Tarefa
@@ -47,6 +61,7 @@ class TarefaCreateUpdateSerializer(ModelSerializer):
 class TarefaListSerializer(ModelSerializer):
     categoria = CharField(source="categoria.nome", read_only=True)
     status_display = SerializerMethodField()
+    imagem = ImageSerializer(required=False)
 
     def get_status_display(self, instance):
         return instance.get_status_display()
