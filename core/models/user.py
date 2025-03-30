@@ -1,7 +1,3 @@
-"""
-Database models.
-"""
-
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
@@ -9,7 +5,6 @@ from django.contrib.auth.models import (
 )
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
 
 class UserManager(BaseUserManager):
     """Manager for users."""
@@ -51,7 +46,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         unique=True,
         verbose_name=_("email"),
         help_text=_("Email")
-        )
+    )
     name = models.CharField(
         max_length=255,
         blank=True,
@@ -68,6 +63,13 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=False,
         verbose_name=_("Usuário é da equipe"),
         help_text=_("Indica que este usuário pode acessar o Admin.")
+    )
+    imagem = models.ImageField(
+        upload_to="users/", 
+        null=True, 
+        blank=True,
+        verbose_name=_("Imagem do usuário"),
+        help_text=_("Foto de perfil do usuário.")
     )
 
     objects = UserManager()
