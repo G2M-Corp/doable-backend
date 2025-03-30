@@ -7,6 +7,7 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
+from uploader.router import router as uploader_router
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
@@ -22,6 +23,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # OpenAPI 3
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("api/media/", include(uploader_router.urls)),
     path(
         "api/swagger/",
         SpectacularSwaggerView.as_view(url_name="schema"),
