@@ -22,10 +22,6 @@ class Tarefa(models.Model):
         choices=TaskStatus.choices,
         default=TaskStatus.PENDENTE,
     )
-
-    def __str__(self):
-        return f"{self.titulo} | ({', '.join([categoria.nome for categoria in self.categoria.all()])})"
-
     imagem = models.ForeignKey(
         Image,
         related_name="+",
@@ -34,3 +30,6 @@ class Tarefa(models.Model):
         blank=True,
         default=None,
     )
+
+    def __str__(self):
+        return f"{self.titulo} | ({', '.join([categoria.nome for categoria in self.categoria.all()])})"
