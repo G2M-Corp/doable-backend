@@ -67,6 +67,25 @@ pip install -r requirements.txt
 
 Por padrão, o projeto usa SQLite em ambiente de desenvolvimento. Não é necessária configuração adicional.
 
+#### Detalhes do SQLite:
+
+- O arquivo de banco de dados SQLite (`db.sqlite3`) é criado automaticamente na raiz do projeto
+- Para utilizar SQLite, não é necessário incluir `DATABASE_URL` no arquivo `.env`
+- Para visualizar e gerenciar o banco de dados SQLite, você pode utilizar:
+  - [DB Browser for SQLite](https://sqlitebrowser.org/) - Interface gráfica multiplataforma
+  - [SQLite Studio](https://sqlitestudio.pl/) - Alternativa leve e portátil
+  - Extensões para VSCode como "SQLite Viewer" ou "SQLite"
+
+#### Backup do banco SQLite:
+
+```bash
+# Criar backup do banco de dados
+cp db.sqlite3 db.sqlite3.backup
+
+# Restaurar de um backup
+cp db.sqlite3.backup db.sqlite3
+```
+
 ### PostgreSQL (Produção)
 
 1. Crie um banco de dados PostgreSQL
