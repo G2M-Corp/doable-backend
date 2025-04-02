@@ -10,7 +10,6 @@ Doable é uma API REST para gerenciamento de tarefas que permite aos usuários c
 - **Django REST Framework**: Toolkit para construção de APIs Web
 - **PostgreSQL/SQLite**: Bancos de dados suportados
 - **SimpleJWT**: Autenticação via JSON Web Tokens
-- **Passage.id**: Sistema de autenticação alternativo
 - **DRF Spectacular**: Documentação automática da API (OpenAPI/Swagger)
 - **PDM**: Gerenciador de dependências e pacotes Python
 
@@ -19,7 +18,6 @@ Doable é uma API REST para gerenciamento de tarefas que permite aos usuários c
 - Python 3.10 ou superior
 - PDM (Python Dependency Manager)
 - Banco de dados (PostgreSQL recomendado para produção, SQLite para desenvolvimento)
-- Acesso à internet para recursos externos (Passage.id, Cloudinary)
 
 ## Instalação
 
@@ -46,8 +44,6 @@ MODE=DEVELOPMENT  # DEVELOPMENT, PRODUCTION, MIGRATE
 DEBUG=True
 SECRET_KEY=django_insecure_gere_uma_chave_secreta
 # DATABASE_URL=postgres://user:password@localhost:5432/doable (opcional, para PostgreSQL)
-PASSAGE_APP_ID=seu_passage_app_id
-PASSAGE_API_KEY=seu_passage_api_key
 MY_IP=127.0.0.1
 ```
 
