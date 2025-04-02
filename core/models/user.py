@@ -35,12 +35,6 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     """User model in the system."""
 
-    passage_id = models.CharField(
-        max_length=255,
-        unique=True,
-        verbose_name=_("passage_id"),
-        help_text=_("Passage ID")
-    )
     email = models.EmailField(
         max_length=255,
         unique=True,
