@@ -41,17 +41,24 @@ class TarefaViewSet(ModelViewSet):
         serializer.save(usuario=self.request.user)
 
     @extend_schema(request=None)
-    @action(detail=False, methods=["post"])
+    @action(detail=False, methods=["patch"])
     def update_overdue_tasks(self, request):
-        tarefas_atrasadas = Tarefa.objects.filter(
-            prazo__lt=date.today(), status__in=[Tarefa.TaskStatus.PENDENTE, Tarefa.TaskStatus.EM_ANDAMENTO]
+        queryset = self.get_queryset().filter(
+            data_limite__lt=date.today(),
+            status__in=[Tarefa.TaskStatus.PENDENTE, Tarefa.TaskStatus.EM_ANDAMENTO]
         )
-        tarefas_atrasadas.update(status=Tarefa.TaskStatus.ATRASADA)
-        return Response({"status": "Tarefas atrasadas atualizadas com sucesso."}, status=status.HTTP_200_OK)
+        count = queryset.update(status=Tarefa.TaskStatus.ATRASADA)
+        return Response(
+            {"message": f"{count} tarefas foram marcadas como atrasadas"},
+            status=status.HTTP_200_OK
+        )
 
     @extend_schema(request=None)
-    @action(detail=False, methods=["post"])
+    @action(detail=False, methods=["patch"])
     def complete_all_tasks(self, request):
-        tarefas = Tarefa.objects.filter(status=Tarefa.TaskStatus.EM_ANDAMENTO)
-        tarefas.update(status=Tarefa.TaskStatus.CONCLUIDA)
-        return Response({"status": "Todas as tarefas em andamento foram concluídas."}, status=status.HTTP_200_OK)
+        queryset = self.get_queryset()
+        count = queryset.update(status=Tarefa.TaskStatus.CONCLUIDA)
+        return Response(
+            {"message": f"{count} tarefas foram marcadas como concluídas"},
+            status=status.HTTP_200_OK
+        )
