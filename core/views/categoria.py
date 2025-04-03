@@ -4,6 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 from django.db.models.aggregates import Sum
 from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Count
@@ -19,6 +20,7 @@ class CategoriaViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     filterset_fields = ["nome"]
     search_fields = ["nome", "descricao"]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         usuario = self.request.user

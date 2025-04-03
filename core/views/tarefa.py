@@ -8,7 +8,7 @@ from django.db.models.aggregates import Sum
 from django_filters.rest_framework import DjangoFilterBackend
 from datetime import date
 from drf_spectacular.utils import extend_schema
-
+from rest_framework.permissions import IsAuthenticated
 
 from core.models import Tarefa
 from core.serializers import TarefaSerializer
@@ -16,6 +16,8 @@ from core.serializers import TarefaCreateUpdateSerializer
 
 
 class TarefaViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     def get_queryset(self):
         usuario = self.request.user
         if usuario.is_superuser:
