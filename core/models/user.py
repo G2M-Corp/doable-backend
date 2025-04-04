@@ -4,6 +4,7 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.db import models
+from uploader.models import Image
 from django.utils.translation import gettext_lazy as _
 
 class UserManager(BaseUserManager):
@@ -58,10 +59,13 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name=_("Usuário é da equipe"),
         help_text=_("Indica que este usuário pode acessar o Admin.")
     )
-    imagem = models.ImageField(
-        upload_to="users/", 
-        null=True, 
+    imagem = models.ForeignKey(
+        "uploader.Image",
+        related_name="+",
+        on_delete=models.SET_NULL,
+        null=True,
         blank=True,
+        default=None,
         verbose_name=_("Imagem do usuário"),
         help_text=_("Foto de perfil do usuário.")
     )
