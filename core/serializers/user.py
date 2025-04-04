@@ -12,14 +12,23 @@ class UserSerializer(ModelSerializer):
         fields = "__all__"
         depth = 1
         read_only_fields = ['is_staff', 'is_superuser']
-        imagem_attachment_key = SlugRelatedField(
+        extra_kwargs = {
+            'imagem': {'required': False, 'allow_null': True}
+        }
+        
+    imagem_attachment_key = SlugRelatedField(
         source="imagem",
         queryset=Image.objects.all(),
         slug_field="attachment_key",
         required=False,
+        allow_null=True,
         write_only=True,
-        )
-        imagem = ImageSerializer(required=False)
+    )
+    imagem = ImageSerializer(
+        required=False,
+        read_only=True,
+        allow_null=True
+    )
     
     def create(self, validated_data):
         password = validated_data.pop('password', None)
