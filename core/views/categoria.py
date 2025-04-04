@@ -8,11 +8,19 @@ from rest_framework.permissions import IsAuthenticated
 from django.db.models.aggregates import Sum
 from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Count
-
+from drf_spectacular.utils import extend_schema, extend_schema_view
 from core.models import Categoria
 from core.serializers import CategoriaSerializer
 
-
+@extend_schema_view(
+    list=extend_schema(tags=["Categorias"]),
+    create=extend_schema(tags=["Categorias"]),
+    retrieve=extend_schema(tags=["Categorias"]),
+    update=extend_schema(tags=["Categorias"]),
+    partial_update=extend_schema(tags=["Categorias"]),
+    destroy=extend_schema(tags=["Categorias"]),
+    total_by_category=extend_schema(tags=["Categorias"], description="Retorna o total de tarefas por categoria")
+)
 class CategoriaViewSet(ModelViewSet):
 
     queryset = Categoria.objects.all()
