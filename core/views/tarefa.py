@@ -62,3 +62,4 @@ class TarefaViewSet(ModelViewSet):
             {"message": f"{count} tarefas foram marcadas como concluídas"},
             status=status.HTTP_200_OK
         )
+        

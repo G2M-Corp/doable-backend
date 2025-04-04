@@ -69,3 +69,4 @@ class TarefaListSerializer(ModelSerializer):
     class Meta:
         model = Tarefa
         fields = "__all__"
+        
