@@ -144,7 +144,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 SPECTACULAR_SETTINGS = {
     "TITLE": "Doable API",
     "DESCRIPTION": "API REST para gerenciamento de tarefas, construída com Django e Django REST Framework, permitindo organização, categorização e acompanhamento de tarefas.",
-    "VERSION": "1.0.0"
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
 }
 
 AUTH_USER_MODEL = "core.User"
