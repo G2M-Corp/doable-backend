@@ -15,6 +15,7 @@ class CategoriaSerializer(ModelSerializer):
         model = Categoria
         fields = "__all__"
 
+
 class CategoriaCreateUpdateSerializer(ModelSerializer):
     usuario = HiddenField(default=CurrentUserDefault())
 

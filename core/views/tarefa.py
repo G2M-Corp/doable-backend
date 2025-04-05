@@ -7,14 +7,23 @@ from rest_framework.viewsets import ModelViewSet
 from django.db.models.aggregates import Sum
 from django_filters.rest_framework import DjangoFilterBackend
 from datetime import date
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, extend_schema_view
 from rest_framework.permissions import IsAuthenticated
 
 from core.models import Tarefa
 from core.serializers import TarefaSerializer
 from core.serializers import TarefaCreateUpdateSerializer
 
-
+@extend_schema_view(
+    list=extend_schema(tags=["Tarefas"]),
+    create=extend_schema(tags=["Tarefas"]),
+    retrieve=extend_schema(tags=["Tarefas"]),
+    update=extend_schema(tags=["Tarefas"]),
+    partial_update=extend_schema(tags=["Tarefas"]),
+    destroy=extend_schema(tags=["Tarefas"]),
+    update_overdue_tasks=extend_schema(tags=["Tarefas"], description="Atualiza tarefas vencidas para status atrasado"),
+    complete_all_tasks=extend_schema(tags=["Tarefas"], description="Marca todas as tarefas como concluídas")
+)
 class TarefaViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
@@ -62,3 +71,4 @@ class TarefaViewSet(ModelViewSet):
             {"message": f"{count} tarefas foram marcadas como concluídas"},
             status=status.HTTP_200_OK
         )
+        

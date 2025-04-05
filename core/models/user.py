@@ -58,10 +58,13 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name=_("Usuário é da equipe"),
         help_text=_("Indica que este usuário pode acessar o Admin.")
     )
-    imagem = models.ImageField(
-        upload_to="users/", 
+    imagem = models.ForeignKey(
+        "uploader.Image",
+        related_name="+",
+        on_delete=models.SET_NULL,
         null=True, 
         blank=True,
+        default=None,
         verbose_name=_("Imagem do usuário"),
         help_text=_("Foto de perfil do usuário.")
     )
@@ -71,8 +74,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
+
     class Meta:
         """Meta options for the model."""
-
         verbose_name = "Usuário"
         verbose_name_plural = "Usuários"

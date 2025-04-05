@@ -142,9 +142,10 @@ else:
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SPECTACULAR_SETTINGS = {
-    "TITLE": "<PROJETO> API",
-    "DESCRIPTION": "API para o projeto <descreva aqui seu projeto>.",
+    "TITLE": "Doable API",
+    "DESCRIPTION": "API REST para gerenciamento de tarefas, construída com Django e Django REST Framework, permitindo organização, categorização e acompanhamento de tarefas.",
     "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
 }
 
 AUTH_USER_MODEL = "core.User"
