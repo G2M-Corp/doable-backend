@@ -13,7 +13,7 @@ class Tarefa(models.Model):
     
     titulo = models.CharField(max_length=255)
     descricao = models.TextField(blank=True)
-    categoria = models.ManyToManyField(Categoria, related_name="tarefas")
+    categoria = models.ManyToManyField(Categoria, related_name="tarefas", blank=True, default=None)
     data_criacao = models.DateTimeField(auto_now_add=True)
     data_limite = models.DateTimeField()
     usuario = models.ForeignKey(User, on_delete=models.PROTECT, related_name="tarefas")
